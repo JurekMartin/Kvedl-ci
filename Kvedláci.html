@@ -1,0 +1,208 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Vesmírná Loď Kleofáš (VL KLEOFAS)</title>
+
+  <link rel="stylesheet" href="kvedlaci.css">
+
+</head>
+
+<body>
+
+    <H1>Řídící počítač VL KLEOFAS</H1>
+<!--onclick="toggleID('kapitan-login');hideID('kapitan');restartField('kapitan-heslo');" -->
+    <div class = "centerMe">
+        <button class = "main-button" id = "kapitanskyPristup" onclick="control('kapitan')"><H2>Kapitánský přístup</H2></button>
+        <button class = "main-button" onclick="control('technik')"><H2>Technická sekce</H2></button>
+        <button class = "main-button" onclick="control('lekar')"><H2>Lékařská sekce</H2></button>
+    </div>
+
+
+    <div id="kapitanLogin" class = "centerMe">
+        <span>Zadej heslo: </span>
+        <input id="kapitanHeslo" type = "password">
+        <button onclick="password(document.getElementById('kapitanHeslo').value,'kapitan','kapitanskeHeslo')">Zadej</button>
+    </div>
+
+
+    <div id = "kapitan" class = "centerMe">
+        <button onclick="control('naklad')"><div>Manipulace s nákladem</div></button>
+        <button onclick="control('komunikace')"><div>Komunikace</div></button>
+        <button onclick="control('skener')"><div>Skener</div></button>
+        <button onclick="control('rozkazy')"><div>Rozkazy</div></button>
+
+        <div id = "sklady">
+            <h2>Manipulace s nákladem</h2>
+            <h3>Skladový prostor 1</h3>
+            <div id ="sklad1Otevreno"></div>
+            <div id = "sklad1Obsah"></div>
+            <button onclick ="skladDoors('sklad1')">OTEVŘÍT/ZAVŘÍT DVEŘE</button>
+            <div id="errorSklad1"></div>
+
+            <h3>Skladový prostor 2</h3>
+            <div id ="sklad2Otevreno"></div>
+            <div id = "sklad2Obsah"></div>
+            <button onclick ="skladDoors('sklad2')">OTEVŘÍT/ZAVŘÍT DVEŘE</button>
+            <div id="errorSklad2"></div>
+
+            <h3>Skladový prostor 3</h3>
+            <div id ="sklad3Otevreno"></div>
+            <div id = "sklad3Obsah"></div>
+            <button onclick ="skladDoors('sklad3')">OTEVŘÍT/ZAVŘÍT DVEŘE</button>
+            <div id="errorSklad3"></div>
+        </div>
+
+        <div id = "komunikace">
+                <h2>Komunikace</h2>
+                <h3>Vysílání</h3>
+                <div><button>Poslat zprávu</button><span> PROZOR! Kodér vyřazen z provozu. Možnost poslat pouze standardizovanou nouzovou komunikaci.</span></div>
+                <div><button onclick = "sendSOS();resolveMessages()">Vyslat nouzový signál</button><span>Zašle urgentní žádost o pomoc na nejbližší komunikační uzly Republiky spolu s polohou a trajektorií lodi.</span></div>
+
+                <h3>Příchozí zprávy</h3>
+                <div>VL Todesstern: Nouzový signál zachycen. Záchranná loď VL Hope vyslána vaším směrem. Předpokládaný přílet za:<span> 50 minut.</span></div> 
+                <div>@ížďžáriska44: Tady Pikkaccio, velitel Q'dLacké flotily. Zachytili jsme váš nouzový signál. TADY BUDE SRDCERYVNÉ POVÍDÁNÍ, HRAJÍCÍ NA CITY!!!</div>
+        </div>
+
+        <div id = "skener">
+                <h2>Skener</h2>
+                <div>POZOR! Skener poškozen. Dosah skeneru omezen.</div>
+                <div><buttnon>Zahájit sken okolí</buttnon></div>
+                <div>Sken dokončen.</div>
+                <ul>V oblasti se nachází:
+                    <li>Vesmírné lodi: <span>0</span></li>
+                    <li>Planety: 0</li>
+                    <li>Další objekty: Hvězda XYZ, POZOR! Kolizní kurz! Srážka nastane zhruba za: <span>50 minut</span></li>
+                </ul>
+
+                <div id = "skener-zpravy">
+                    Doplňující info:
+                </div>
+        </div>
+
+        <div id = "rozkazy">
+            <h2>Rozkazy k misi</h2>
+            <ul>
+                <li>Doručit náklad ze skladového prostoru 2 na stanci VS UROBOROS.<br>
+                    PRIORITA: Primární. Splnit úkol za jakoukoli cenu.
+                </li>
+                <li>
+                    Doručit náklad ze skladového prostoru 1 na stanici VS UROBOROS.<br>
+                    PRIORITA: Sekundární. Splnit v případě, že to neohrozí splnění primárního cíle.
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <div id = "technik" class = "centerMe">
+        <button onclick="control('diagnostika')"><div>Diagnostika technického stavu lodi</div></button>
+        <button onclick="control('systemy')"><div>Nastavení systémů</div></button>
+        <button onclick="control('dokumentace')"><div>Lodní dokumentace</div></button>
+
+        <div id = "diagnostikaLodi">
+            <h2>Diagnostika lodi</h2>
+
+            <strong>Kritické systémy:</strong>
+            <ul id = "criticalErrors">
+            </ul>
+
+            <strong>Ostatní systémy:</strong>
+            <ul id = "otherErrors">
+            </ul>
+
+        </div>
+
+        <div id = "nastaveniSystemu">
+            <h2>Nastavení systémů</h2>
+
+            <div>Manuální restart systémů. Zadej příkaz pro záložní nahození systému: 
+                <input id="systemCommand" type="text">
+                <button onclick="setSystem(document.getElementById('systemCommand').value)">Zadej</button>
+            </div>
+
+            <ul>
+                <li id="nastaveniGenerator">Spouštěč generátoru. Status: <span id="statusGenerator">Generátor není aktivní, vyžaduje opravu. Viz diagnostika.</span></li>
+                <li id="nastaveniPrivodPaliva">Přívod paliva. Status: <span id="statusPrivodPaliva">UZAVŘEN. UPOZORNĚNÍ: KRITICKÁ CHYBA, viz diagnostika</span></li>
+                <li id="nastaveniTeplotaVKabine">Nastavení teploty v kabině. Status: <span id="statusTeplotaVKabine">Cílová teplota: 22°C.</span></li>
+            </ul>
+
+        </div>
+
+
+        <div id = "lodniDokumentace">
+            <h2>Lodní dokumentace</h2>
+
+            <p>Vážený uživateli! <br>
+                Děkujeme, že sis vybral pro své cestování vermírem dopravní loď typu TRAKAR. Jedná se nejspolehlivější nákladní loď, konstruovanou na převážení nákladů do 10 tun rychlostí až 0.7 c.
+            </p>
+            <p>Tato dokumentace obsahuje detailní popis všech lodních systémů, funkcionalit a důležitých návodů tak, aby její obsluhu zvládl bez problémů i naprostý laik.</p>
+            <p><br>
+            <strong>KAPITOLA 1: oprava zdroje energie po zásahu střelou</strong><br>
+            Ochranný obal lodi by měl v případě zásahu střely do ničívé síly 15005 OJ (již standardně používají větší armádní lodě) zabránit proražení pláště i v případě vyřazení štítů. Plášť však neposkytuje dokonalou izolaci a je možné, že dojde k jeho roztavení.<br>
+            V takovém případě pravděpodobně dojde k zamoření strojovny přebytečným teplem a jedovatými výpary. Zároveň by mělo dojít k aktivaci automatického dekontaminátoru, kt€rý temporarily zap€č€tí bezpečnostní dveřře und przipravi stryovnu pro vstup posaadki, ktérá próvedé nežbitnó manuálnó opravó.<br>
+            POT é, co €j machineovna accccccccccccccccc€sible, je $#{][]} POZOR! DUL@ZIT€: ýžřčš[[[, ale #\\@{}€čšĚŮ <br>
+            €rRor: Soulož poškoZEN
+            </p>
+        </div>
+
+
+
+    </div>
+
+    <div id = "lekar" class = "centerMe">
+        <button onclick="control('analyzaVzorku')"><div>Analýza vzorků</div></button>
+        <button onclick="control('prvniPomoc')"><div>První pomoc</div></button>
+        <button onclick="control('lekarskeZpravy')"><div>Lékařské zprávy</div></button>
+
+        <div id = "analyzaVzorku">
+            <h2>Analýza vzorků</h2>
+    
+                <div id="zadejVzorek">VLOŽTE VZOREK DO ANALYZÁTORU. Pro rychlejší zpracování doporučujeme vložit popis vzorku ve formátu XZP: <input type="text" id="vzorekKod"></input>
+                    <button id="zahajitSkenVzorku" onclick="analyzeSpecimen(document.getElementById('vzorekKod').value)">Zahájit sken vzorku</button>
+                </div>
+
+                <div id="results"></div>
+                <div id="specimenWorking">PRACUJI...</div>
+
+        </div>
+
+        <div id = "prvniPomoc">
+            <h2>První pomoc</h2>
+                <div id="prvni-pomoc">Modul první pomoci aktivní a plně funkční. Bez ohledu na vyhlídky uklidněte pacienta a zahajte léčbu.</div>
+        </div>
+
+        <div id = "lekarskeZpravy">
+            <h2>Lékařské zprávy</h2>
+                <div id="lekarske-zpravy">
+                    Jak vyplynulo z rychlého lékařského vyšetření před misí, zdraví posádky je před odletem v normě, bez rizik.<br>
+                    Žádný ze členů posádky netrpí obtížemi, které by mu měly bránit ve splnění mise.<br>
+                    Seznam drobných obtíží s nízkým významem:
+                    <ul>
+                        <li>#€řžšúio@: mírně zvýšený tlak, nedoporučujeme velmi prudké pohyby</li>
+                        <li>Jana Vomáčková: prod€dan€ asdoijd čřčíííí může mít za následek ##y\/'ň</li>
+                        <li>#€řžšúioaasljjj@: umělá výplň ňadra se může stát toxickou při dlouhodobě vysokých teplotách</li>
+                    </ul>
+                </div>
+        </div>
+
+    </div>
+
+    <H2 id="zpravy" class = "centerMe">
+        Tady budou aktuální zprávy, například když přijde komunikace, výstraha, že je něco špatně apod.
+    </H2>
+
+
+
+    <script src="constants.js"></script>
+    <script src="controls.js"></script>
+    <script src="elementManipulation.js"></script>
+    <script src="shipCaptain.js"></script>
+    <script src="shipTechnician.js"></script>
+    <script src="shipDoctor.js"></script>
+    <script src="prepareGame.js"></script>
+</body>
+</html>
