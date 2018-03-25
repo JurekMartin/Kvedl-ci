@@ -34,13 +34,16 @@ function skladDoors(skladID){
     const sklad = sklady[skladID];
     const htmlState = document.getElementById(sklad.idState);
     const htmlContent = document.getElementById(sklad.idContent);
+    const button = document.getElementById(skladID+"Button");
 
     if (sklad.opened &&sklad.doorOperable){
         sklad.opened=false;
         htmlState.innerHTML="STAV: zavřeno";
+        button.innerHTML = "OTEVŘÍT DVEŘE";
     } else if (sklad.doorOperable){
         sklad.opened=true;
         htmlState.innerHTML="STAV: otevřeno";
+        button.innerHTML = "ZAVŘÍT DVEŘE";
     } else {alert ("CHYBA! Dveře mimo provoz! Pro více informací spusťte diagnostiku.")};
 }
 

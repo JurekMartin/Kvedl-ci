@@ -16,15 +16,15 @@
 <!--onclick="toggleID('kapitan-login');hideID('kapitan');restartField('kapitan-heslo');" -->
     <div class = "centerMe">
         <button class = "main-button" id = "kapitanskyPristup" onclick="control('kapitan')"><H2>Kapitánský přístup</H2></button>
-        <button class = "main-button" onclick="control('technik')"><H2>Technická sekce</H2></button>
-        <button class = "main-button" onclick="control('lekar')"><H2>Lékařská sekce</H2></button>
+        <button class = "main-button" id = "technickyPristup" onclick="control('technik')"><H2>Technická sekce</H2></button>
+        <button class = "main-button" id = "lekarskyPristup" onclick="control('lekar')"><H2>Lékařská sekce</H2></button>
     </div>
 
 
     <div id="kapitanLogin" class = "centerMe">
         <span>Zadej heslo: </span>
         <input id="kapitanHeslo" type = "password">
-        <button onclick="password(document.getElementById('kapitanHeslo').value,'kapitan','kapitanskeHeslo')">Zadej</button>
+        <button onclick="password(document.getElementById('kapitanHeslo'),'kapitan','kapitanskeHeslo')">Zadej</button>
     </div>
 
 
@@ -39,19 +39,19 @@
             <h3>Skladový prostor 1</h3>
             <div id ="sklad1Otevreno"></div>
             <div id = "sklad1Obsah"></div>
-            <button onclick ="skladDoors('sklad1')">OTEVŘÍT/ZAVŘÍT DVEŘE</button>
+            <button onclick ="skladDoors('sklad1')" class="doorButton" id ="sklad1Button">ZAVŘÍT DVEŘE</button>
             <div id="errorSklad1"></div>
 
             <h3>Skladový prostor 2</h3>
             <div id ="sklad2Otevreno"></div>
             <div id = "sklad2Obsah"></div>
-            <button onclick ="skladDoors('sklad2')">OTEVŘÍT/ZAVŘÍT DVEŘE</button>
+            <button onclick ="skladDoors('sklad2')" class="doorButton" id ="sklad2Button">OTEVŘÍT DVEŘE</button>
             <div id="errorSklad2"></div>
 
             <h3>Skladový prostor 3</h3>
             <div id ="sklad3Otevreno"></div>
             <div id = "sklad3Obsah"></div>
-            <button onclick ="skladDoors('sklad3')">OTEVŘÍT/ZAVŘÍT DVEŘE</button>
+            <button onclick ="skladDoors('sklad3')" class="doorButton" id ="sklad3Button">OTEVŘÍT DVEŘE</button>
             <div id="errorSklad3"></div>
         </div>
 

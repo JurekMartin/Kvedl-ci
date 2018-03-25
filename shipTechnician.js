@@ -135,16 +135,16 @@ function showErrors () {
         let status = error.status.broken;
 
         if (!error.fixed){
-            errorElement.className = "unsolvedError";
+            errorElement.className = "error unsolvedError";
         } else {
-            errorElement.className = "solvedError";
+            errorElement.className = "error solvedError";
         }
 
         if (error.fixed){
             status = error.status.fixed;
         }
 
-        errorElement.innerHTML = error.text+": "+status;
+        errorElement.innerHTML = "<span class='errorTitle'>"+error.text+"</span>: "+status;
 
         crits.appendChild(errorElement);
     }
@@ -156,16 +156,16 @@ function showErrors () {
         let status = error.status.broken;
 
         if (!error.fixed){
-            errorElement.className = "unsolvedError";
+            errorElement.className = "error unsolvedError";
         } else {
-            errorElement.className = "solvedError";
+            errorElement.className = "error solvedError";
         }
 
         if (error.fixed){
             status = error.status.fixed;
         }
 
-        errorElement.innerHTML = error.text+": "+status;
+        errorElement.innerHTML = "<span class='errorTitle'>"+error.text+"</span>: "+status;
 
         other.appendChild(errorElement);
     }

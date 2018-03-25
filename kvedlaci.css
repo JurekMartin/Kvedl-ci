@@ -58,3 +58,42 @@ table{
 .solvedError {
     background-color: green;
 }
+
+.error {
+    margin: 2px 0;
+    padding: 5px;
+}
+
+.errorTitle {
+    font-weight: bold;
+}
+
+#kapitanskyPristup {
+    background-color: yellowgreen;
+    transition-property: background-color;
+    transition-duration: 1.5s;
+}
+
+#kapitanskyPristup:hover {
+    background-color: yellow;
+}
+
+#technickyPristup {
+    background-color: lightblue;
+    transition-property: background-color;
+    transition-duration: 1.5s;
+}
+
+#technickyPristup:hover {
+    background-color: blue;
+}
+
+#lekarskyPristup {
+    background-color: white;
+    transition-property: background-color;
+    transition-duration: 1.5s;
+}
+
+#lekarskyPristup:hover {
+    background-color: red;
+}
