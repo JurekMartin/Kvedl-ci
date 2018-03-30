@@ -211,7 +211,7 @@ function resolveMessages(){
             messageManager.humanMsgInProgress=true;
             window.setTimeout(
                 function(){
-                    alert(messages[string],"PŘÍCHOZÍ ZPRÁVA");
+                    addMessage("zpravy",messages[string], "humanMessage");
                     obj.sent=true;
                     messageManager.humanMsgInProgress=false;
                     messageManager.SOSqueueHuman=0;
@@ -232,7 +232,7 @@ function resolveMessages(){
             messageManager.qDlakMsgInProgress=true;
             window.setTimeout(
                 function(){
-                    alert(messages[string],"PŘÍCHOZÍ ZPRÁVA");
+                    addMessage("zpravy",messages[string], "qDlakMessage");
                     obj.sent=true;
                     messageManager.qDlakMsgInProgress=false;
                     messageManager.SOSqueueQdlak=0;

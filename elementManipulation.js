@@ -20,12 +20,11 @@ function hideID(idString){
 
 function password(password, passwordName, controlName){
     if (passwords[passwordName]===password.value){
-//        alert("JEDNORÁZOVÝ PŘÍSTUP POVOLEN: SEKCE KAPITÁN")
         password.value = "";
         control(controlName);
     } else {
-        alert("PŘÍSTUP ZAMÍTNUT!!!");
         password.value = "";
+        addMessage("zpravy","POZOR, neúspěšný pokus o login do kapitánské sekce!!!","alertMessage");
     }
 }
 

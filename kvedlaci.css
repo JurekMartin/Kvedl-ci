@@ -1,9 +1,63 @@
 body {
     background-color:pink;
     color:black;
-    margin:5%;
+    margin:0;
     line-height:1.5;
+    display: block;
+    height: 100vh;
+    overflow: hidden;
 }
+
+.upperContainer {
+    height: calc(100% - 100px);
+    overflow-y: auto;
+}
+
+#zpravy {
+    position: relative;
+    bottom: 0;
+    margin: 0 10%;
+    padding: 0 20px;
+    width: 80%;
+    height: 100px;
+    background-color: lightgrey;
+    transition-property: bottom, height;
+    transition-duration: 0.5s;
+}
+
+#zpravy:hover {
+    padding: 20px;
+    height: 820px;
+    overflow-y: auto;
+    bottom: 735px;
+}
+
+.humanMessage {
+    background-color: lightblue;
+}
+
+.qDlakMessage {
+    background-color: lightcoral;
+}
+
+.alertMessage {
+    color: red;
+    animation: blinker 3.0s linear infinite;
+}
+
+.alertNoBlink {
+    color: red;
+}
+
+.messageSuccess {
+    color: green;
+}
+
+@keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
 
 h1 {
     text-align:center;
@@ -69,13 +123,13 @@ table{
 }
 
 #kapitanskyPristup {
-    background-color: yellowgreen;
+    background-color: lightgreen;
     transition-property: background-color;
     transition-duration: 1.5s;
 }
 
 #kapitanskyPristup:hover {
-    background-color: yellow;
+    background-color: green;
 }
 
 #technickyPristup {
@@ -96,4 +150,14 @@ table{
 
 #lekarskyPristup:hover {
     background-color: red;
+}
+
+.message {
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 130%;
+}
+
+#lodniDokumentace {
+    margin: 0 10%;
 }

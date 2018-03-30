@@ -4,14 +4,14 @@ let setVirus = function setVirus(){
 
 let randomize = function randomize(){
     for (i=0;i<resultArray.length;i++){
-        resultArray[i][1]=Math.random();
+        resultArray[i][1]=Math.random()*(i+1);
     }
 }
 
 let testIsRunning = false;
 let abortOldTest = false;
 
-function waitForResults(miliseconds, ...functions){
+function waitForResults(miliseconds, specimenID, ...functions){
 
     if(testIsRunning){
         abortOldTest=true;
@@ -44,7 +44,7 @@ function waitForResults(miliseconds, ...functions){
 
             if (functions){
                 for (y=0;y<functions.length;y++){
-                    functions[y]();
+                    functions[y](specimenID);
                 }
             }
 
@@ -53,7 +53,7 @@ function waitForResults(miliseconds, ...functions){
 
 }
 
-let createTable = function createTable(){
+let createTable = function createTable(specimenID){
 
     let table = document.createElement("table");
 
@@ -71,6 +71,8 @@ let createTable = function createTable(){
     }
 
     results.appendChild(table);
+
+    addMessage("zpravy","Výsledky analýzy vzorku " +specimenID + ":"+ "<table>"+table.innerHTML+"</table>");
 
 }
 
@@ -95,11 +97,11 @@ function analyzeSpecimen(code){
         case "VZ2":
         case "VZ3":
         case "VZ4":
-            waitForResults(20000,randomize, setVirus,createTable);
+            waitForResults(20000,code, randomize, setVirus, createTable);
             break;
 
         default:
-            waitForResults(5000,randomize,createTable);
+            waitForResults(5000,code, randomize, createTable);
             break;
 
     }

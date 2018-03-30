@@ -17,7 +17,7 @@ let errors = {
             text: "Motory",
             fixed: false,
             status: {
-                broken: "POZOR! Přívod paliva do motoru přerušen! Stabilizátor paliva zničen! Otevření přívodu paliva do motoru může vést k explozi nádrží! Pravděpodobnost exploze v tomto scénáři: 100 %.",
+                broken: "POZOR! Přívod paliva do motoru přerušen! Stabilizátor paliva zničen! Otevření přívodu paliva do motoru může vést s pravděpodobností 100 % k explozi nádrží!",
                 fixed: "Tato chyba nejde ve hře opravit, ajajajajaj! :) ",
             }
         },
@@ -178,9 +178,25 @@ showErrors();
 function solveError (errorType, errorName) {
 
     errors[errorType][errorName].fixed = true;
+    addMessage("zpravy", errors[errorType][errorName].status.fixed, "messageSuccess");
     showErrors();
 
 }
+
+function logErrors () {
+
+    let counter = 1;
+
+    for (propt in errors.other) {debugger;
+        setTimeout(() => {debugger; addMessage("zpravy", errors.other[propt].status.broken,"alertNoBlink");counter++;},counter*5000 );
+    }
+    counter = 1;
+    for (propt in errors.fatal) {
+        addMessage("zpravy", errors.fatal[propt].status.broken,"alertNoBlink");
+    }
+}
+
+logErrors();
 
 function setSystem(command){
 
@@ -198,12 +214,14 @@ function setSystem(command){
             solveError("fatal","generator");
             solveError("fatal","communications");
             shipSystems.canSendandReceiveMessages=true;
-            alert("Generátor je nahozen a funguje na nízký výkon.")
         break;
 
         case "ventilator":
             solveError("other","temperature");
-            alert("Po restartu ventilátoru je teplota v obytných částech stabilizovaná.")
+        break;
+
+        default:
+            alert("Nahození systému neúspěšné. Nic se nestalo.")
         break;
 
     }

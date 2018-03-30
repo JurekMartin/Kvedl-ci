@@ -30,3 +30,13 @@ function control(controlName){
     };
 
 }
+
+function addMessage (id, message, cssClass = "") {
+    let date = new Date();
+    let text = date.getHours() +":" + date.getMinutes() + ":" + date.getSeconds() +"   :   ";
+    text +=message;
+    let element = document.createElement("div");
+    element.innerHTML = text;
+    element.className = cssClass +" message";
+    document.getElementById(id).insertBefore(element,document.getElementById(id).firstChild);
+}
