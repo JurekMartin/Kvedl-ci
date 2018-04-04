@@ -185,18 +185,21 @@ function solveError (errorType, errorName) {
 
 function logErrors () {
 
-    let counter = 1;
+    let counter = 0;
+    let arrayOfProps = [];
 
-    for (propt in errors.other) {debugger;
-        setTimeout(() => {debugger; addMessage("zpravy", errors.other[propt].status.broken,"alertNoBlink");counter++;},counter*5000 );
+    for (propt in errors.other) {
+        addMessage("zpravy", errors.other[propt].status.broken,"alertNoBlink")
     }
-    counter = 1;
+
+    counter = 0;
     for (propt in errors.fatal) {
         addMessage("zpravy", errors.fatal[propt].status.broken,"alertNoBlink");
     }
 }
 
-logErrors();
+addMessage("zpravy","POZOR! Kritické poškození lodi! Hlavní počítač mimo provoz! Přepnuto do nouzového rozhraní. Spouštím diagnostiku systémů...","alertMessage");
+window.setTimeout(function(){logErrors()},20000);
 
 function setSystem(command){
 

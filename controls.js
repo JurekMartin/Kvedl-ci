@@ -33,7 +33,11 @@ function control(controlName){
 
 function addMessage (id, message, cssClass = "") {
     let date = new Date();
-    let text = date.getHours() +":" + date.getMinutes() + ":" + date.getSeconds() +"   :   ";
+    let minutes = date.getMinutes();
+    if (minutes < 10) { minutes = "0"+minutes};
+    let seconds = date.getSeconds();
+    if (seconds < 10) { seconds = "0"+seconds};
+    let text = date.getHours() +":" + minutes + ":" + seconds +"   :   ";
     text +=message;
     let element = document.createElement("div");
     element.innerHTML = text;
