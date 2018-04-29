@@ -59,8 +59,8 @@
             <div id = "komunikace">
                     <h2>Komunikace</h2>
                     <h3>Vysílání</h3>
-                    <div><button>Poslat zprávu</button><span> PROZOR! Kodér vyřazen z provozu. Možnost poslat pouze standardizovanou nouzovou komunikaci.</span></div>
-                    <div><button onclick = "sendSOS();resolveMessages()">Vyslat nouzový signál</button><span>Zašle urgentní žádost o pomoc na nejbližší komunikační uzly Republiky spolu s polohou a trajektorií lodi.</span></div>
+                    <div class="comm-row"><button disabled class = "comm-button">Poslat zprávu</button><span class="comm-text"> PROZOR! Kodér vyřazen z provozu. Možnost poslat pouze standardizovanou nouzovou komunikaci.</span></div>
+                    <div class="comm-row"><button class = "comm-button" onclick = "sendSOS();resolveMessages()">Vyslat nouzový signál</button><span class="comm-text">Zašle urgentní žádost o pomoc na nejbližší komunikační uzly Republiky spolu s polohou a trajektorií lodi.</span></div>
 
                     <h3>Příchozí zprávy</h3>
                     <div id = "prichoziZpravy"></div>
@@ -68,17 +68,16 @@
 
             <div id = "skener">
                     <h2>Skener</h2>
-                    <div>POZOR! Skener poškozen. Dosah skeneru omezen.</div>
-                    <div><buttnon>Zahájit sken okolí</buttnon></div>
-                    <div>Sken dokončen.</div>
-                    <ul>V oblasti se nachází:
-                        <li>Vesmírné lodi: <span>0</span></li>
+                    <div>POZOR! Skener poškozen. Dosah skeneru omezen na: 2 metry.</div>
+
+                    <ul><strong>V oblasti dosahu skeneru se nachází:</strong>
+                        <li>Vesmírné lodi: <span>o</span></li>
                         <li>Planety: 0</li>
-                        <li>Další objekty: Hvězda XYZ, POZOR! Kolizní kurz! Srážka nastane zhruba za: <span>50 minut</span></li>
+                        <li>Další objekty: O</li>
                     </ul>
 
                     <div id = "skener-zpravy">
-                        Doplňující info:
+                        Dle výsledku skenu okolí se nacházíte v prázdné části vesmíru. Přejeme příjemný let!
                     </div>
             </div>
 
@@ -121,7 +120,7 @@
 
                 <div>Manuální restart systémů. Zadej příkaz pro restart systému: 
                     <input id="systemCommand" type="text">
-                    <button onclick="setSystem(document.getElementById('systemCommand').value)">Zadej</button>
+                    <button onclick="setSystem(document.getElementById('systemCommand').value);document.getElementById('systemCommand').value=''">Zadej</button>
                 </div>
 
             </div>
@@ -137,7 +136,7 @@
                 <p><br>
                 <strong>KAPITOLA 1: oprava zdroje energie po zásahu střelou</strong><br>
                 Ochranný obal lodi by měl v případě zásahu střely do ničívé síly 15005 OJ (již standardně používají větší armádní lodě) zabránit proražení pláště i v případě vyřazení štítů. Plášť však neposkytuje dokonalou izolaci a je možné, že dojde k jeho roztavení.<br>
-                V takovém případě pravděpodobně dojde k zamoření strojovny přebytečným teplem a jedovatými výpary. Zároveň by mělo dojít k aktivaci automatického dekontaminátoru, kt€rý temporarily zap€č€tí bezpečnostní dveřře und przipravi stryovnu pro vstup posaadki, ktérá próvedé nežbitnó manuálnó opravó.<br>
+                V krajním případě velmi nefortunate zásahu dojde k zamoření strojovny přebytečným teplem a jedovatými výpary. Zároveň by mělo dojít k aktivaci automatického dekontaminátoru, kt€rý temporarily zap€č€tí bezpečnostní dveřře und przipravi stryovnu pro vstup posaadki, ktérá próvedé nežbitnó manuálnó opravó.<br>
                 POT é, co €j machineovna accccccccccccccccc€sible, je $#{][]} POZOR! DUL@ZIT€: ýžřčš[[[, ale #\\@{}€čšĚŮ <br>
                 €rRor: Soulož poškoZEN
                 </p>

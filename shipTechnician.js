@@ -112,7 +112,7 @@ let errors = {
             text: "Data v lodním počítači",
             fixed: false,
             status: {
-            broken: "Poškození dat v lodním po49t@$$. Neukládají se informace o dění na palubě. N^#teré soubory jsou poškozeny. Ohrožení: minimální. N€zjiszt€n0 poskozeni zadneho wichtig s0ubbbboru.",
+            broken: "Poškození dat v lodním po49t@$$. Neukládají se informace o dění na palubě. N^#teré soubory jsou poškozeny. Ohrožení: cannot read '.d@nger' of undefinaed! N€zjiszt€n0 poskozeni wichtig s0ubbbboru. List witchtig subbbboru muuuze bit poszkozsen.",
             fixed:"Tato chyba nejde ve hřhe opravit, ajajajajaj! :) ",
             }
         },

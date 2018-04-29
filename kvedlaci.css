@@ -76,12 +76,22 @@ h3 {
 ul {
     margin-left:10%;
     margin-right:10%;
+    list-style-type: none;
 }
 
 .main-button {
     width:200px;
     margin:20px;
     display:inline-block;
+}
+
+.comm-button {
+    width: 210px;
+    margin: 0 20px 0 40px;
+}
+
+.comm-row {
+    text-align: initial;
 }
 
 
@@ -159,5 +169,9 @@ table{
 }
 
 #lodniDokumentace {
+    margin: 0 10%;
+}
+
+#zadejVzorek {
     margin: 0 10%;
 }

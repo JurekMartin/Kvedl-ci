@@ -26,7 +26,7 @@ const sklady = {
         opened:false,
         doorOperable:false,
         content:"zásoby jídla, vody, skafandry, nástroje apod.",
-        warning:"CHYBA! Roztaveno primární ovládání dveří. Nevratně poškozeno nouzové otevírání dveří.<br>Doporučený postup: otevřít dveře laserovou dýkou.<br>Počet laserových dýk na palubě: 1<br>Laserová dýka se nachází ve: skladovém prostoru 3."
+        warning:"CHYBA! Roztaveno primární ovládání dveří. Nevratně poškozeno nouzové otevírání dveří.<br>Doporučený postup: otevřít dveře laserovou dýkou.<br>Počet laserových dýk na palubě: 2<br>První laserová dýka se nachází ve: skladovém prostoru 3.<br> Druhá laserová dýka se nachází ve strojovně v roztaveném stavu."
     },
 }
 
@@ -189,9 +189,11 @@ const messageManager = {
 }
 
 function sendSOS(){
-    const qdlak = shipSystems.sendingToqDlak;
-    messageManager.SOSqueueHuman+=1;
-    if (qdlak){messageManager.SOSqueueQdlak+=1;}
+    if (shipSystems.canSendandReceiveMessages) {
+        const qdlak = shipSystems.sendingToqDlak;
+        messageManager.SOSqueueHuman+=1;
+        if (qdlak){messageManager.SOSqueueQdlak+=1;}
+    } else { addMessage("zpravy", "POZOR! Odeslání nouzového signálu se nezdařilo. Zkontrolujte funkčnost vysílačky.","message alertNoBlink")}
 }
 
 
