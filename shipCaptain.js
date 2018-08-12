@@ -71,8 +71,6 @@ const messageManager = {
     humanMsgInProgress:false,
     qDlakMsgInProgress:false,
 
-//    canSendandReceiveMessages:false,
-//    sendingToKvedlak:true,
     SOSqueueHuman:0,
     SOSqueueQdlak:0,
 
@@ -83,6 +81,8 @@ const messageManager = {
         humanWarning3:"Tady velící technik VS HOPE. Pokud nemůžete uhnout ze současaného kurzu, vyšlete jako potvrzení další tři SOS zprávy.",
         humanWarning4:"Tady kapitán VS HOPE. Zvýšili jsme výkon motorů na 110 %. Budme u vás za 30 minut po předpokládané kolizi s XW3.",
         humanWarning5:"Tady admirál Adama. KDE MÁTE ZBYLÉ DVĚ LODĚ??? VS HOPE na moje doporučení odhodila vše, co nebylo nezbytně nutné. 15 z 20 hrdinů na palubě šlo do vakua. VS HOPE letí k vám na 140 % výkonu. Předpokládaná doba příletu - 15 minut po střetu s XW3. Je mi jedno, jak to uděláte, ale k té lodi se DOSTANETE a náklad ve druhém skladu DORUČÍTE. Jestli ne, tak vás dám zaživa stáhnout z kůže jako nejhorší zrádce, i kdyby to mělo být to poslední, co udělám!",
+        humanWarning6:"Admirál Adama. Předpokládám, že nemáte funkční motory. Máte palivo? Pokud ano, pošlete další dva nouzové signály.",
+        humanWarning7:"Admirál Adama. Jste na oběžné dráze hvězdy a postupně klesáte k jejímu povrchu. Pokud odpálíte palivo ve správný čas, exploze vás odmrští na kolizní kurz s VS HOPE. <br> Dle našich propočtů je třeba, abyste se odpálili ve vazovagálním-beta T.",
 
         kvedlak0:"Dobry den. Zde Krrrr-Quik. Zachytili jsme vasi nouzovou pastu. Jedeme na pomoc. Pokud se vzdate, zachranime vas a predame vasim kamaradum. Pokud souhlasite, vyslete dalsi tri nouzove pasty. Preji hodne stesti. Krrrr-Quik.",
         kvedlak1:"Dobry den. Zde Krrrr-Quik. Dekujeme za duveru. Zaznamenali jsme, ze mate kolizni kurz s hvezdou Nadeje. Predpokladame, ze jej nemuzete zmenit, jinak byste tak jiz ucinili. Prosim pokuste se jej zmenit, je nam to moc lito, ale nestihneme vas zachranit drive nez 20 minut po vasi nestastne potencialni kolizi. Bohuzel nezname vasi presnou situaci, takze nejsme schopni pomoci vice. At vam kloaky zalije pocit stesti. Krrr-Quik.",
@@ -96,6 +96,7 @@ const messageManager = {
         humanWarning3:false,
         humanWarning4:false,
         humanWarning5:false,
+        humanWarning6:false,
         kvedlak1:false,
         kvedlak2:false,
         kvedlak3:false,
@@ -147,6 +148,20 @@ const messageManager = {
 
         humanWarning6:{
             trueMessage:"humanWarning5",
+            SOSqueueHuman:0,
+            delayInMS:5,
+            sent:false,
+        },
+
+        humanWarning7:{
+            trueMessage:"humanWarning6",
+            SOSqueueHuman:2,
+            delayInMS:5,
+            sent:false,
+        },
+
+        humanWarning8:{
+            trueMessage:"humanWarning7",
             SOSqueueHuman:9900,
             delayInMS:500000000,
             sent:false,
@@ -189,10 +204,11 @@ const messageManager = {
 }
 
 function sendSOS(){
-    if (shipSystems.canSendandReceiveMessages) {
+        if (shipSystems.canSendandReceiveMessages) {
+        addMessage("zpravy", "Vyslán nouzový signál.","message")
         const qdlak = shipSystems.sendingToqDlak;
         messageManager.SOSqueueHuman+=1;
-        if (qdlak){messageManager.SOSqueueQdlak+=1;}
+        if (qdlak) {messageManager.SOSqueueQdlak+=1;}
     } else { addMessage("zpravy", "POZOR! Odeslání nouzového signálu se nezdařilo. Zkontrolujte funkčnost vysílačky.","message alertNoBlink")}
 }
 
@@ -204,7 +220,7 @@ function resolveMessages(){
     const qHuman = messageManager.SOSqueueHuman;
     const qQdlak = messageManager.SOSqueueQdlak;
 
-    for (i=0;i<6;i++){
+    for (i=0;i<8;i++){
         let y = i+1;
         let string = "humanWarning"+i;
         let obj = conditions["humanWarning"+i];
@@ -213,7 +229,8 @@ function resolveMessages(){
             messageManager.humanMsgInProgress=true;
             window.setTimeout(
                 function(){
-                    addMessage("zpravy",messages[string], "humanMessage");
+                    addMessage("zpravy","Máte novou zprávu!", "humanMessage");
+                    addMessage("prichoziZpravy",messages[string], "humanMessage");
                     obj.sent=true;
                     messageManager.humanMsgInProgress=false;
                     messageManager.SOSqueueHuman=0;
@@ -234,7 +251,8 @@ function resolveMessages(){
             messageManager.qDlakMsgInProgress=true;
             window.setTimeout(
                 function(){
-                    addMessage("zpravy",messages[string], "qDlakMessage");
+                    addMessage("zpravy","Máte novou zprávu!", "qDlakMessage");
+                    addMessage("prichoziZpravy",messages[string], "qDlakMessage");
                     obj.sent=true;
                     messageManager.qDlakMsgInProgress=false;
                     messageManager.SOSqueueQdlak=0;

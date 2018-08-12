@@ -14,7 +14,7 @@
     <div class = "upperContainer">
 
         <H1>Řídící počítač VL KLEOFAS</H1>
-    <!--onclick="toggleID('kapitan-login');hideID('kapitan');restartField('kapitan-heslo');" -->
+
         <div class = "centerMe">
             <button class = "main-button" id = "kapitanskyPristup" onclick="control('kapitan');"><H2>Kapitánský přístup</H2></button>
             <button class = "main-button" id = "technickyPristup" onclick="control('technik')"><H2>Technická sekce</H2></button>
@@ -60,7 +60,7 @@
                     <h2>Komunikace</h2>
                     <h3>Vysílání</h3>
                     <div class="comm-row"><button disabled class = "comm-button">Poslat zprávu</button><span class="comm-text"> PROZOR! Kodér vyřazen z provozu. Možnost poslat pouze standardizovanou nouzovou komunikaci.</span></div>
-                    <div class="comm-row"><button class = "comm-button" onclick = "sendSOS();resolveMessages()">Vyslat nouzový signál</button><span class="comm-text">Zašle urgentní žádost o pomoc na nejbližší komunikační uzly Republiky spolu s polohou a trajektorií lodi.</span></div>
+                    <div class="comm-row"><button class = "comm-button" onclick = "sendSOS();resolveMessages()">Vyslat nouzový signál</button><span class="comm-text">Zašle šifrovanou urgentní žádost o pomoc na nouzové frekvenci Republiky.</span></div>
 
                     <h3>Příchozí zprávy</h3>
                     <div id = "prichoziZpravy"></div>
@@ -68,7 +68,7 @@
 
             <div id = "skener">
                     <h2>Skener</h2>
-                    <div>POZOR! Skener poškozen. Dosah skeneru omezen na: 2 metry.</div>
+                    <div>POZOR! Skener poškozen. Roztavení zesilovače. Dosah skeneru omezen na: 20 centimetrů.</div>
 
                     <ul><strong>V oblasti dosahu skeneru se nachází:</strong>
                         <li>Vesmírné lodi: <span>o</span></li>
@@ -77,7 +77,7 @@
                     </ul>
 
                     <div id = "skener-zpravy">
-                        Dle výsledku skenu okolí se nacházíte v prázdné části vesmíru. Přejeme příjemný let!
+                        Dle výsledku skenu se nacházíte v prázdné části vesmíru. Přejeme příjemný let!
                     </div>
             </div>
 
@@ -88,8 +88,7 @@
                         PRIORITA: Primární. Splnit úkol za jakoukoli cenu.
                     </li>
                     <li>
-                        Doručit náklad ze skladového prostoru 1 na stanici VS UROBOROS.<br>
-                        PRIORITA: Sekundární. Splnit v případě, že to neohrozí splnění primárního cíle.
+                        Akceptovatelné ztráty za předpokladu splnění úkolů: 100 %.
                     </li>
                 </ul>
             </div>
@@ -157,6 +156,7 @@
                     <div id="zadejVzorek">VLOŽTE VZOREK DO ANALYZÁTORU. Pro rychlejší zpracování doporučujeme vložit popis vzorku ve formátu XZP: <input type="text" id="vzorekKod"></input>
                         <button id="zahajitSkenVzorku" onclick="analyzeSpecimen(document.getElementById('vzorekKod').value)">Zahájit sken vzorku</button>
                     </div>
+                    <div>Pozor, přívod energie k analyzátoru je poškozen. Analyzátor pracuje na záložní zdroj. Stav baterrre: #@ %.</div>
 
                     <div id="results"></div>
                     <div id="specimenWorking"></div>
@@ -192,6 +192,7 @@
 
     </H2>
 
+    <script src="sounds.js"></script>    
     <script src="constants.js"></script>
     <script src="controls.js"></script>
     <script src="elementManipulation.js"></script>
@@ -199,6 +200,6 @@
     <script src="shipTechnician.js"></script>
     <script src="shipDoctor.js"></script>
     <script src="prepareGame.js"></script>
-
+    <script src="endGame.js"></script>
 </body>
 </html>

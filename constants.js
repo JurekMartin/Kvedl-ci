@@ -7,6 +7,7 @@ let shipSystems = {
     generator:false,
     sendingToqDlak:true,
     canSendandReceiveMessages:false,
+    ventilator: false
 
 }
 

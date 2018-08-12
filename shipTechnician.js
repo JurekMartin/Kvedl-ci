@@ -18,12 +18,12 @@ let errors = {
             fixed: false,
             status: {
                 broken: "POZOR! Přívod paliva do motoru přerušen! Stabilizátor paliva zničen! Otevření přívodu paliva do motoru může vést s pravděpodobností 100 % k explozi nádrží!",
-                fixed: "Tato chyba nejde ve hře opravit, ajajajajaj! :) ",
+                fixed: "Přívod paliva do motoru otevřen. Připoutejte se a vyčkejte na zážeh.",
             }
         },
 
         structure:{
-            id: "motors",
+            id: "structure",
             text: "Struktura lodi",
             fixed: false,
             status: {
@@ -48,7 +48,7 @@ let errors = {
             fixed: false,
             status: {
                 broken: "POZOR! Přístup do strojovny uzavřen! Důvod: Nebezpečné prostředí po explozi způsobené výbuchem střely. Spuštěny automatické systémy pro dekomtaminaci a ochlazení místnosti na provozní teplotu. Místnost bude zpřístupněna v blízké době.",
-                fixed: "Přístup do strojovny otevřen. Prostředí ve strojovně je způsobilé ke krátkodobému životu.",
+                fixed: "Přístup do strojovny otevřen. Prostředí ve strojovně nepředstavuje bezprostřední riziko pro život.",
             }
         },
 
@@ -68,6 +68,16 @@ let errors = {
             fixed: false,
             status: {
                 broken: "POZOR! Štíty jsou nefunkční. Loď je bez fyzické ochrany! Roztavený stabilizátor. Vyměňte stabilizátor - k dispozici ve skladovém prostoru č. 3.",
+                fixed:"Tato chyba nejde ve hře opravit, ajajajajaj! :) ",
+            }
+        },
+
+        scanner:{
+            id: "scanner",
+            text: "Lodní skener",
+            fixed: false,
+            status: {
+                broken: "POZOR! Zesilovač skeneru poškozen. Dosah skeneru je omezen. Odhadovaný dosah skeneru: 20 centimetrů.",
                 fixed:"Tato chyba nejde ve hře opravit, ajajajajaj! :) ",
             }
         },
@@ -93,7 +103,7 @@ let errors = {
             fixed: false,
             status: {
             broken: "POZOR! Vyšší teplota vzduchu v části pro posádku. Zdravotní nebezpečí: minimální",
-            fixed:"Teplota stabilizována ",
+            fixed:"Teplota v části pro posádku je stabilizována.",
             }
         },
 
@@ -103,6 +113,26 @@ let errors = {
             fixed: false,
             status: {
             broken: "POZOR! Silné poškození záložní podpory života. Poškození: 90 %. Záložní podpora života je schopná udržet naživu po dobu delší než pár minut maximálně jednoho dospělého člověka. Nebezpečí: minimální, dokud funguje hlavní podpora života. NEVYPÍNEJTE hlavní podporu života!",
+            fixed:"Tato chyba nejde ve hřhe opravit, ajajajajaj! :) ",
+            }
+        },
+
+        cargoDoors:{
+            id: "cargoDoors",
+            text: "Dveře k nákladovému prostoru č. 3",
+            fixed: false,
+            status: {
+            broken: "Dveře k nákladovému prostoru č. 3 jsou zaseklé. Otevírací mechanismus je roztaven.",
+            fixed:"Tato chyba nejde ve hřhe opravit, ajajajajaj! :) ",
+            }
+        },
+
+        stasisCabin:{
+            id: "stasisCabin",
+            text: "Stázová kabina v nákladovém prostoru č. 1",
+            fixed: false,
+            status: {
+            broken: "Poškození stázové kabiny v nákladovém prostoru č. 1. Kabina je nefunční. Proběhlo nouzové vypnutí stázového pole.",
             fixed:"Tato chyba nejde ve hřhe opravit, ajajajajaj! :) ",
             }
         },
@@ -122,7 +152,7 @@ let errors = {
 }
 
 function showErrors () {
-//debugger;
+
     let crits = document.getElementById("criticalErrors");
     let other = document.getElementById("otherErrors");
     crits.innerHTML="";
@@ -173,8 +203,6 @@ function showErrors () {
 
 }
 
-showErrors();
-
 function solveError (errorType, errorName) {
 
     errors[errorType][errorName].fixed = true;
@@ -185,29 +213,46 @@ function solveError (errorType, errorName) {
 
 function logErrors () {
 
-    let counter = 0;
-    let arrayOfProps = [];
+    let arrayOfProps1 = [];
+    let arrayOfProps2 = [];
 
     for (propt in errors.other) {
-        addMessage("zpravy", errors.other[propt].status.broken,"alertNoBlink")
+        arrayOfProps1.push(propt);
     }
 
-    counter = 0;
-    for (propt in errors.fatal) {
-        addMessage("zpravy", errors.fatal[propt].status.broken,"alertNoBlink");
+    for (property in errors.fatal) {
+        arrayOfProps2.push(property);
     }
+
+    for (i = 0; i < arrayOfProps1.length; i++) {
+        displayErrorWithTimeout(errors.other[arrayOfProps1[i]].status.broken,i*1000);
+    }
+
+    for (i = 0; i < arrayOfProps2.length; i++) {
+        displayErrorWithTimeout(errors.fatal[arrayOfProps2[i]].status.broken,i*1000+10000);
+    }
+
 }
 
-addMessage("zpravy","POZOR! Kritické poškození lodi! Hlavní počítač mimo provoz! Přepnuto do nouzového rozhraní. Spouštím diagnostiku systémů...","alertMessage");
-window.setTimeout(function(){logErrors()},20000);
+function displayErrorWithTimeout (message, timeout) {
+    window.setTimeout(function(){
+        addMessage("zpravy", message,"alertNoBlink");
+        playSound(alertSound);
+    }, timeout);
+}
+
 
 function setSystem(command){
 
     switch (command) {
 
         case "frekvence":
-            shipSystems.sendingToKvedlak=false;
-            alert("Vysílací frekvence změněna.")
+            shipSystems.sendingToqDlak=!shipSystems.sendingToqDlak;
+            if (shipSystems.sendingToqDlak) {
+                addMessage("zpravy", "Vysílací frekvence změněna. Vysílač nastaven na široké pásmo frekvencí maximalizující dosah zpráv.", "messageSuccess");
+            } else {
+                addMessage("zpravy", "Vysílací frekvence změněna. Vysílač nastaven na šifrovanou nouzovou frekvenci Republiky.", "messageSuccess");
+            }
         break;
 
         case "generator":
@@ -220,7 +265,13 @@ function setSystem(command){
         break;
 
         case "ventilator":
+            shipSystems.ventilator = true;
             solveError("other","temperature");
+        break;
+
+        case "motor":
+            solveError("fatal","motors");
+            endGame();
         break;
 
         default:

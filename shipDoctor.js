@@ -97,7 +97,7 @@ function analyzeSpecimen(code){
         case "VZ2":
         case "VZ3":
         case "VZ4":
-            waitForResults(20000,code, randomize, setVirus, createTable);
+            waitForResults(1000,code, randomize, setVirus, createTable);
             break;
 
         default:
