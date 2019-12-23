@@ -77,7 +77,7 @@ let errors = {
             text: "Lodní skener",
             fixed: false,
             status: {
-                broken: "POZOR! Zesilovač skeneru poškozen. Dosah skeneru je omezen. Odhadovaný dosah skeneru: 20 centimetrů.",
+                broken: "POZOR! Zesilovač skeneru poškozen. Dosah skeneru je omezen. Odhadovaný dosah skeneru: 0,2 metru. V dosahu skeneru nebyly detekovány žádné cizí objekty.",
                 fixed:"Tato chyba nejde ve hře opravit, ajajajajaj! :) ",
             }
         },
